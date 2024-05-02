@@ -1,0 +1,59 @@
+<!--
+/*===================================================================================
+* 
+*   Copyright (c) Userware/OpenSilver.net
+*      
+*   This file is part of the OpenSilver Runtime (https://opensilver.net), which is
+*   licensed under the MIT license: https://opensource.org/licenses/MIT
+*   
+*   As stated in the MIT license, "the above copyright notice and this permission
+*   notice shall be included in all copies or substantial portions of the Software."
+*  
+\*====================================================================================*/
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$(MSBuildThisFileDirectory)\OpenSilver.TypeScriptDefinitionsToCSharp.Config.targets" />
+
+  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)..\tools\$(_OpenSilverTSDefAssemblyName).dll" TaskName="OpenSilver.Compiler.TypeScriptDefToCSharp" />
+
+  <ItemGroup>
+    <AvailableItemName Include="TypeScriptCompile" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <EnableTypeScriptDefToCSharp Condition="'$(EnableTypeScriptDefToCSharp)' == ''">true</EnableTypeScriptDefToCSharp>
+    <EnableTypeScriptDefToCSharp Condition="'$(Language)' != 'C#'">false</EnableTypeScriptDefToCSharp>
+  </PropertyGroup>
+
+  <Target Name="_TypeScriptDefinitionGeneratorBeforeBuild" BeforeTargets="BeforeBuild" Condition="'$(EnableTypeScriptDefToCSharp)' == 'true'">
+
+    <ItemGroup>
+      <Content Include="@(TypeScriptCompile)"/>
+      <TypeScriptCompile Remove="@(TypeScriptCompile)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_TSDefFiles Include="@(Content)"
+                   Condition=" $([System.Text.RegularExpressions.Regex]::IsMatch('%(FullPath)', '.+\.d\.ts'))"/>
+    </ItemGroup>
+
+    <Message Text="Starting processing TypeScript Definition files: @(_TSDefFiles)"
+             Importance="Normal" />
+
+    <TypeScriptDefToCSharp InputFiles="@(_TSDefFiles)"
+                           OutputDirectory="$(MSBuildProjectDirectory)\$(IntermediateOutputPath)">
+      <Output TaskParameter="GeneratedFiles" ItemName="_TSGeneratedFiles"/>
+    </TypeScriptDefToCSharp>
+
+    <Message Text="TypeScriptDefToCSharp output: @(_TSGeneratedFiles)"
+             Importance="Normal" />
+
+    <ItemGroup>
+      <Compile Include="@(_TSGeneratedFiles)"/>
+    </ItemGroup>
+
+  </Target>
+
+</Project>

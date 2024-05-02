@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>OpenSilver.TypeScriptDefinitionsToCSharp</id>
+    <version>$PackageVersion$</version>
+    <authors>Userware</authors>
+    <projectUrl>https://github.com/OpenSilver/OpenSilver.TypeScriptDefinitionsToCSharp</projectUrl>
+    <repository type="git" url="https://github.com/OpenSilver/OpenSilver.TypeScriptDefinitionsToCSharp" />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>OpenSilver is an open-source reimplementation of Silverlight that runs on current browsers via WebAssembly.</description>
+    <copyright>Copyright (c) 2024, Userware. All rights reserved.</copyright>
+    <tags>silverlight webassembly csharp xaml wasm dotnet .net C# javascript html html5 blazor mono uwp</tags>
+    <icon>images\OpenSilver_icon.png</icon>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="OpenSilver" version="$OpenSilverDependencyVersion$" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="../../src/TypeScriptDefinitionsSupport/bin/$Configuration$/netstandard2.0/OpenSilver.TSDef.Support.dll" target="lib/netstandard2.0/OpenSilver.TSDef.Support.dll" />
+    <file src="../../src/Tasks/OpenSilver.TypeScriptDefinitionsToCSharp.targets" target="build/OpenSilver.TypeScriptDefinitionsToCSharp.targets" />
+    <file src="../../src/Tasks/SourceGenerator/bin/$Configuration$/netstandard2.0/OpenSilver.TypeScriptDefinitionsToCSharp.Config.targets" target="build/OpenSilver.TypeScriptDefinitionsToCSharp.Config.targets" />
+    <file src="../../src/Tasks/SourceGenerator/bin/$Configuration$/netstandard2.0/OpenSilver.TSDef.SourceGenerator.$OpenSilverBuildUUID$.dll" target="tools/OpenSilver.TSDef.SourceGenerator.$OpenSilverBuildUUID$.dll" />
+    <file src="OpenSilver_icon.png" target="images\OpenSilver_icon.png" />
+  </files>
+</package>
