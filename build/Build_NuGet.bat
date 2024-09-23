@@ -33,7 +33,7 @@ FOR /F "delims=" %%a IN ('powershell -Command "[guid]::NewGuid().ToString('N')"'
 ECHO. 
 ECHO %ESC%[95mBuilding %ESC%[0mRelease %ESC%[95mconfiguration%ESC%[0m
 ECHO. 
-msbuild %SRC_DIR%\OpenSilver.TypeScriptDefinitionsToCSharp.sln -p:Configuration=Release;OpenSilverBuildUUID=%BUILD_UUID%;OpenSilverVersion=%OpenSilverPkgVersion% -clp:WarningsOnly -restore
+msbuild %SRC_DIR%\OpenSilver.TypeScriptDefinitionsToCSharp.sln -p:Configuration=Release;OpenSilverBuildUUID=%BUILD_UUID%;OpenSilverVersion=%OpenSilverPkgVersion% -verbosity:minimal -restore
 
 ECHO. 
 ECHO %ESC%[95mPacking %ESC%[0mOpenSilver.TypeScriptDefinitionsToCSharp %ESC%[95mNuGet package%ESC%[0m
