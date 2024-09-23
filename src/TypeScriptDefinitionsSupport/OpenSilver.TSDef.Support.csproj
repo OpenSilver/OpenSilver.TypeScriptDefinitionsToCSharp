@@ -2,10 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <UseOpenSilver>true</UseOpenSilver>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="OpenSilver" Version="3.0.0" />
-  </ItemGroup>
 
 </Project>
